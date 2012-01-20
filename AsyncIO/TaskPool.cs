@@ -50,7 +50,11 @@ namespace AsyncIO
             {
                 RemoveTask(task);
 
-            }).Catch(Fail);
+            }).Catch(ex =>
+            {
+                RemoveTask(task);
+                Fail(ex);
+            });
         }
 
         public Task Drain()
@@ -59,7 +63,7 @@ namespace AsyncIO
             {
                 // Mark the operation as complete
                 _tcs.SetResult(null);
-                
+
                 // Clear the list
                 _tasks.Clear();
 
