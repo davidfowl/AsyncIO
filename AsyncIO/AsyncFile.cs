@@ -29,7 +29,7 @@ namespace AsyncIO
             }
 
             var inputStream = new FileStream(sourceFileName, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize, useAsync: true);
-            var outputStream = new FileStream(destFileName, FileMode.Create, FileAccess.Write, FileShare.Write, bufferSize, useAsync: false);
+            var outputStream = new FileStream(destFileName, FileMode.Create, FileAccess.Write, FileShare.Write, bufferSize, useAsync: true);
             var tcs = new TaskCompletionSource<object>();
 
             var buffer = new byte[bufferSize];
