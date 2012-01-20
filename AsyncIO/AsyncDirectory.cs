@@ -38,7 +38,7 @@ namespace AsyncIO
 
             var filesTasks = from file in sourceDirectory.GetFiles()
                              let targetPath = GetDestinationPath(sourcePath, destPath, file)
-                             select AsyncFile.CopyAsync(file.FullName, targetPath);
+                             select Task.Factory.StartNew(() => File.Copy(file.FullName, targetPath, overwrite: true));
 
             var directoryTasks = from directory in sourceDirectory.GetDirectories()
                                  let target = new DirectoryInfo(GetDestinationPath(sourcePath, destPath, directory))
